@@ -1,0 +1,15 @@
+C:\Users\kvsun\source\repos\WebClick\bin\Debug\WebClick.exe.config
+C:\Users\kvsun\source\repos\WebClick\bin\Debug\WebClick.exe
+C:\Users\kvsun\source\repos\WebClick\bin\Debug\WebClick.pdb
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.csprojAssemblyReference.cache
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.Form1.resources
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.Properties.Resources.resources
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.csproj.GenerateResource.cache
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.csproj.CoreCompileInputs.cache
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.exe
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.pdb
+C:\Users\kvsun\source\repos\WebClick\bin\Debug\WebDriver.dll
+C:\Users\kvsun\source\repos\WebClick\bin\Debug\WebDriver.xml
+C:\Users\kvsun\source\repos\WebClick\obj\Debug\WebClick.csproj.CopyComplete
+C:\Users\kvsun\source\repos\WebClick\bin\Debug\WebDriver.Support.dll
+C:\Users\kvsun\source\repos\WebClick\bin\Debug\WebDriver.Support.xml
