@@ -21,8 +21,12 @@ namespace WebClick
         public Form1()
         {
             InitializeComponent();
-            driver  = new ChromeDriver();
-            driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["url"]);
+
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.DebuggerAddress = "localhost:9014";
+            //  chromeOptions.AddAdditionalCapability("debuggerAddress", "localhost:9014");
+            driver  = new ChromeDriver(chromeOptions);
+            //driver.Navigate().GoToUrl(ConfigurationManager.AppSettings["url"]);
             WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(15));
 
         }
