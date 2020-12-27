@@ -1,4 +1,6 @@
-﻿namespace WebClick
+﻿using System;
+
+namespace WebClick
 {
     partial class Form1
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+           // this.OnFormClosing += new EventHandler(this.Form1_FormClosing);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
