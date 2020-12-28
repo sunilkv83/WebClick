@@ -19,14 +19,19 @@ namespace WebClick
 {
     public partial class Form1 : Form
     {
+        private ChromeOptions _chromeOptions = new ChromeOptions();
         private IWebDriver driver;
         private SelectElement _selectElement;
-        private IChromeDriverProvider _chromeDriverProvider = null;
+
+        private string _websiteUrl = @"C:/Users/kvsun/Downloads/Test.html";
+        private int _longRunningTaskTimeout = 10000;
 
         public Form1()
         {
             InitializeComponent();
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
+            _chromeOptions.DebuggerAddress = "localhost:9014";
+
             LaunchChromeDriver();
         }
 
@@ -35,10 +40,9 @@ namespace WebClick
         /// </summary>
         private void LaunchChromeDriver()
         {
-            _chromeDriverProvider = new ChromeDriverProvider();
             try
             {
-                driver = _chromeDriverProvider.GetChromeDriver();
+                driver = GetChromeDriver();
             }
             catch (Exception e)
             {
@@ -46,7 +50,7 @@ namespace WebClick
                 KillChromeDriver();
                 //Open the browser and instantiate ChromeDriver
                 LaunchChrome();
-                driver = _chromeDriverProvider.GetChromeDriver();
+                driver = GetChromeDriver();
             }
             WebDriverWait wait = new WebDriverWait(driver, System.TimeSpan.FromSeconds(15));
         }
@@ -61,9 +65,45 @@ namespace WebClick
                 CreateNoWindow = true,
                 StandardOutputEncoding = Encoding.UTF8,
                 FileName = Environment.GetEnvironmentVariable("ProgramFiles(x86)") + @"\Google\Chrome\Application\chrome.exe ",
-                Arguments = ConfigurationManager.AppSettings["url"] + "  -remote-debugging-port=9014 --user-data-dir=" + @"C:\temp\"
+                Arguments = _websiteUrl + "  -remote-debugging-port=9014 --user-data-dir=" + @"C:\temp\"
             };
             process.Start();
+        }
+
+        public ChromeDriver GetChromeDriver()
+        {
+            var task = Task.Run(() =>
+            {
+                return getChromeDriver(_chromeOptions);
+            });
+
+            task.Wait(TimeSpan.FromMilliseconds(_longRunningTaskTimeout));
+            if (task.Status == TaskStatus.RanToCompletion)
+            {
+                return task.Result;
+            }
+            else if (task.Status == TaskStatus.Running)
+            {
+                throw new Exception("Chrome Driver still loading, looks like website/page is not open, so please launch new window");
+            }
+
+            return task.Result;
+        }
+
+        private ChromeDriver getChromeDriver(ChromeOptions chromeOptions)
+        {
+            try
+            {
+                ChromeDriverService service = ChromeDriverService.CreateDefaultService();
+                service.HideCommandPromptWindow = true;
+                var driver = new ChromeDriver(service, chromeOptions);
+                return driver;
+            }
+            catch (Exception)
+            {
+
+            }
+            return null;
         }
 
         private void button1_Click(object sender, EventArgs e)
